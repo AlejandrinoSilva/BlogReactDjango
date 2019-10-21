@@ -22,7 +22,7 @@ export const deleteBlog = id => dispatch => {
         }).catch(err => console.log(err));
 };
 
-export const addBlogs = blog => dispatch => {
+export const addBlog = blog => dispatch => {
     axios.post('/api/blogs/', blog)
         .then(res => {
             dispatch({

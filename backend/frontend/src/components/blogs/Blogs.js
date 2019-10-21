@@ -8,6 +8,7 @@ export class Blogs extends Component {
         blogs: PropTypes.array.isRequired,
         getBlogs: PropTypes.func.isRequired,
         deleteBlog: PropTypes.func.isRequired
+        //addBlog: PropTypes.func.isRequired
     }
 
     componentDidMount(){

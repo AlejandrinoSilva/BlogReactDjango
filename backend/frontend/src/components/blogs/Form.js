@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { addBlog } from '../../actions/blogs';
 
 export class Form extends Component {
     state = {
@@ -8,11 +9,17 @@ export class Form extends Component {
         contenido: ""
     };
 
+    static propTypes = {
+        addBlog: PropTypes.func.isRequired
+    };
+
     onChange = e => this.setState({ [e.target.title]:e.target.value });
 
     onSubmit = e => {
         e.preventDefault();
-        console.log("submit");
+        const { title, contenido } = this.state;
+        const blog = { title, contenido };
+        this.props.addBlog(blog);
     };
 
     render() {
@@ -23,19 +30,19 @@ export class Form extends Component {
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Titulo</label>
-                        <input className="form-control" type="text" name="title" onChange={this.onChange} value={title}></input>
+                        <input className="form-control" type="text" name="title" onChange={this.onChange} value={title} />
                     </div>
                     <div className="form-group">
                         <label>Contenido</label>
-                        <textarea className="form-control" type="text" name="contenido" onChange={this.onChange} value={contenido}></textarea>
+                        <textarea className="form-control" type="text" name="contenido" onChange={this.onChange} value={contenido} />
                     </div>
                     <div className="form-group">
                         <button type="submit" className="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
-        )
-    };
+        );
+    }
 }
 
-export default Form
+export default connect(null, {addBlog})(Form);
