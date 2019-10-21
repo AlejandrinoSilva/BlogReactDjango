@@ -1,4 +1,4 @@
-import { GET_BLOGS, DELETE_BLOG } from '../actions/types.js';
+import { GET_BLOGS, DELETE_BLOG, ADD_BLOG } from '../actions/types.js';
 
 const initialState = {
     blogs: []
@@ -15,6 +15,11 @@ export default function(state = initialState, action){
             return {
                 ...state,
                 blogs: state.blogs.filter(blog => blog.id !== action.payload)
+            };
+        case ADD_BLOG:
+            return {
+                ...state,
+                blogs: [...state.blogs, action.payload]
             };
         default:
             return  state;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_BLOGS, DELETE_BLOG } from './types';
+import { GET_BLOGS, DELETE_BLOG, ADD_BLOG } from './types';
 
 export const getBlogs = ()=> dispatch => {
     axios.get('/api/blogs/')
@@ -18,6 +18,16 @@ export const deleteBlog = id => dispatch => {
             dispatch({
                 type: DELETE_BLOG,
                 payload: id
+            });
+        }).catch(err => console.log(err));
+};
+
+export const addBlogs = blog => dispatch => {
+    axios.post('/api/blogs/', blog)
+        .then(res => {
+            dispatch({
+                type: ADD_BLOG,
+                payload: res.data
             });
         }).catch(err => console.log(err));
 };

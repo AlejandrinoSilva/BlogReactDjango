@@ -1,15 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 export class Form extends Component {
     state = {
-        title: '',
-        contenido: ''
+        title: "",
+        contenido: ""
     };
 
     onChange = e => this.setState({ [e.target.title]:e.target.value });
+
     onSubmit = e => {
         e.preventDefault();
-        console.log('submit');
+        console.log("submit");
     };
 
     render() {
@@ -20,14 +23,14 @@ export class Form extends Component {
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Titulo</label>
-                        <input className="form-control" type="text" name="title" onChange={this.onChange} value={title} />
+                        <input className="form-control" type="text" name="title" onChange={this.onChange} value={title}></input>
                     </div>
                     <div className="form-group">
                         <label>Contenido</label>
-                        <textarea className="form-control" type="text" name="contenido" onChange={this.onChange} value={contenido} />
+                        <textarea className="form-control" type="text" name="contenido" onChange={this.onChange} value={contenido}></textarea>
                     </div>
                     <div className="form-group">
-                        <button className="btn btn-primary" type="submit">Submit</button>
+                        <button type="submit" className="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
