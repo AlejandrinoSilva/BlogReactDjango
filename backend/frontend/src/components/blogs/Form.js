@@ -20,6 +20,10 @@ export class Form extends Component {
         const { title, contenido } = this.state;
         const blog = { title, contenido };
         this.props.addBlog(blog);
+        this.setState({
+            title: "",
+            contenido: ""
+        }); 
     };
 
     render() {

@@ -17,7 +17,7 @@ export const getBlogs = ()=> dispatch => {
 export const deleteBlog = id => dispatch => {
     axios.delete(`/api/blogs/${id}/`)
         .then(res => {
-            dispatch(createMessage({ blogAdded: "Blog Agregado"}));
+            dispatch(createMessage({ blogDelete: "Blog Eliminado"}));
             dispatch({
                 type: DELETE_BLOG,
                 payload: id
