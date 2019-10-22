@@ -1,6 +1,8 @@
 import axios from 'axios';
-import { GET_BLOGS, DELETE_BLOG, ADD_BLOG } from './types';
+import { createMessage } from "./messages"
+import { GET_BLOGS, DELETE_BLOG, ADD_BLOG, GET_ERRORS } from './types';
 
+// Ver blogs
 export const getBlogs = ()=> dispatch => {
     axios.get('/api/blogs/')
         .then(res => {
@@ -15,6 +17,7 @@ export const getBlogs = ()=> dispatch => {
 export const deleteBlog = id => dispatch => {
     axios.delete(`/api/blogs/${id}/`)
         .then(res => {
+            dispatch(createMessage({ blogAdded: "Blog Agregado"}));
             dispatch({
                 type: DELETE_BLOG,
                 payload: id
@@ -22,6 +25,7 @@ export const deleteBlog = id => dispatch => {
         }).catch(err => console.log(err));
 };
 
+// Agregar blogs
 export const addBlog = blog => dispatch => {
     axios.post('/api/blogs/', blog)
         .then(res => {
@@ -29,5 +33,14 @@ export const addBlog = blog => dispatch => {
                 type: ADD_BLOG,
                 payload: res.data
             });
-        }).catch(err => console.log(err.response.data));
+        }).catch(err => {
+            const errors = {
+                msg: err.response.data,
+                status: err.response.status
+            };
+            dispatch({
+                type: GET_ERRORS,
+                payload: errors
+            });
+        });
 };
