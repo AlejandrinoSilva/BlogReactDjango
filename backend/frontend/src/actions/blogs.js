@@ -29,5 +29,5 @@ export const addBlog = blog => dispatch => {
                 type: ADD_BLOG,
                 payload: res.data
             });
-        }).catch(err => console.log(err));
+        }).catch(err => console.log(err.response.data));
 };
